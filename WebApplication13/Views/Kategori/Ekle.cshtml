@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Ekle";
+}
+@using WebApplication13.Models
+<div class="row">
+    @*//row acıp ıcıne sayfanın tamamaını kapalasın dedık*@
+<div class="col-md-12">
+    <div class="col-md-6 col-sm-6">
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                  Kategori Ekle
+                </div>
+                <div class="block-controls">
+                    <a href="/Kategori/Index"><span aria-hidden="true" class="icon icon-cross icon-size-medium block-control-remove"></span></a>
+                    <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                </div>
+            </div>
+            <div class="block-content-outer">
+                <div class="block-content-inner">
+                    <form role="form" action="/Kategori/Ekle" method="post">
+                        @*action="/Kategori/Ekle" ile kategoricontrolurcss dekı urunekleye gı-onderıyoruz ama ıkı tane oldugunda metod="post" yapıp post olana gonderdık*@
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Kategori Adı</label>
+                            <input type="text" name="CategoryName" class="form-control" id="exampleInputEmail1" placeholder="Kategori adını giriniz">
+                            @*form elemn.html den aldıgımız emaıl yapısından email kısmını soyle değiştirdik:1-type ı emaildi,biz urun adını texboxa gırecegımızden burayı text yaptı.2-placeholder="kategori adını giriniz"burası textboxın ıcınde yazan sılık yazıydı urun adını gırınız seklınde duzeltık*@
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tanımı</label>
+                            <input type="text" class="form-control" name="Description" id="exampleInputPassword1" placeholder="Tanımı giriniz">
+                 
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+

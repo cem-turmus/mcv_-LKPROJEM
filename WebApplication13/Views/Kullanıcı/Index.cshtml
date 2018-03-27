@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Üyeler";
+}
+@using System.Web.Security
+@model MembershipUserCollection
+<div class="row">
+    <div class="col-md-12">
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                    Üyeler
+                </div>
+                <div class="block-controls">
+                    <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                    <a href="/Kullanıcı/Ekle" class="btn success-btn rounded">Yeni Üye</a>
+                </div>
+                <div class="block-content-outer">
+                    <div class="block-content-inner">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Kullanıcı Adı</th>
+                                    <th>Email</th>
+                                    <th>Kayıt Tarihi</th>
+                                    <th>Son Giriş Tarihi</th>
+                                    <th>Rolleri</th>
+                                    <th>Rol Ata</th>
+                                    <th>Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (MembershipUser MU in Model)
+                                {
+                                    <tr>
+                                        <td>@MU.UserName</td>
+                                        <td>@MU.Email</td>
+                                        <td>@MU.CreationDate</td>
+                                        <td>@MU.LastLoginDate</td>
+                                        <td><a href="#" class="btn-primary rolgoster" data-Uyeadi="@MU.UserName">Rolleri</a></td>
+                                        <td><a href="/Kullanıcı/RolAta/@MU.UserName" class="btn-success" data-Uyeadi="@MU.UserName">Rol Ata</a></td>
+                                        <td><a href="#" class="btn-danger uyesil" data-Uyeadi="@MU.UserName">Sil</a></td>
+                                        @*data ıcıne usernam diye bır name actık dahasonra username yı alıyoruz ve ajaxa (ajax 'ın kullanıcılar/index e gondermesı ıcın) gonderdık*@
+                                        @*uyesil asagıda script de ozellık kazanıp işlem gorecek *@
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(".rolgoster").click(function () {
+            var ka = $(this).attr("data-Uyeadi");
+            console.log("username : ", ka);
+
+            $.ajax({
+                method: "POST",
+                url: "/Kullanıcı/UyeRolleri",
+                data: { "UserName": ka },
+                dataType: "application/json",
+                done: function (veri) {
+                    alert(veri)
+                    console.log(veri);
+                }
+            })
+        });
+    </script>
+}

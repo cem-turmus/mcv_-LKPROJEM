@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Ürünler";
+
+}
+@using WebApplication13.Models;
+@model List<Products>
+@*bır row acıp ındırdıgımızmız template den dıv calass="row"u aldıp buraya yapıstırdık aynı tabloyu elde etmek ıcın*@
+<div class="row">
+    <div class="col-md-12">
+        @*//col-md-6 ı col-md-12 yaptık tum sayfayı kaplasın dıye .Soyle oluyor:Sayfayı 12 bırıme ayırıp col md  ıle her bırımın cınsını vermısler mesala col-md 1 sayfanın 12 de 1 ıdır.col-md 12 ise sayfanın tamamıdır.bız de col-md-12 yaparak urunlerın tum sayfayı kaplamasını sagladık*@
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                    ÜRÜNLER
+                </div>
+                <div class="block-controls">
+
+                    <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                    <a href="/Urun/UrunEkle" class="btn success-btn rounded">Yeni Ürün</a>
+                </div>
+            </div>
+            <div class="block-content-outer">
+                <div class="block-content-inner">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>UrunAdı</th>
+                                <th>Tedarikçi</th>
+                                <th>Kategori</th>
+                                <th>Birimdeki Miktar</th>
+                                <th>Fiyat</th>
+                                <th>Stok</th>
+                                <th>Yeni Satış</th>
+                                <th>En Az Yeniden Satış</th>
+                                <th>Sonlandı</th>
+                                <th>Sepet</th>
+                                <th>Detay</th>
+                                <th>Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Products Urun in Model)
+                            {
+                                <tr>
+                                    <td>@Urun.ProductName</td>
+                                    @if (Urun.Suppliers == null)
+                                    {
+                                        <td></td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Urun.Suppliers.CompanyName</td>
+                                    }
+                                    @if (Urun.Categories != null)
+                                    {
+                                        <td>@Urun.Categories.CategoryName</td>
+
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+
+                                    <td>@Urun.QuantityPerUnit</td>
+                                    <td>@Urun.UnitPrice</td>
+                                    <td>@Urun.UnitsInStock</td>
+                                    <td>@Urun.UnitsOnOrder</td>
+                                    <td>@Urun.ReorderLevel</td>
+                                    @if (Urun.Discontinued)
+                                    {
+                                        <td><span class="label label-danger">Stokta Yok</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="label label-success">Stokta Var</span></td>
+                                    }
+                                    <td><a href="#" class="btn-primary SepeteAt" data-id="@Urun.ProductID">Sepet</a></td>
+                                    <td><a href="/Urun/UrunDetay?id=@Urun.ProductID&ProductNAME=@Urun.ProductName" class="btn-primary">Detay</a></td>
+                                    <td><a href="/Urun/Sil/@Urun.ProductID" class="btn btn-danger rounded" role="button">Sil</a></td>
+                                   
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(".SepeteAt").click(function () {
+            var id = $(this).data("id");//id yi alıp urunlerden sepete at ectıon una gonderıyoruz.
+            $.ajax({
+                type: "POST",
+                url: "/Urun/SepeteAt/" + id,
+
+            }).done(function () {
+                alert("urun ekleme basarılı");
+                
+                window.location.reload();
+            }).fail(function myfunction() {
+                alert("Ekleme basarısız");
+            })
+        })
+    </script>
+
+}

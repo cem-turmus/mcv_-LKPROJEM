@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Yeni Üye";
+}
+<div class="row">
+    @*//row acıp ıcıne sayfanın tamamaını kapalasın dedık*@
+    <div class="col-md-12">
+        <div class="col-md-6 col-sm-6">
+            <div class="block">
+                <div class="block-heading">
+                    <div class="main-text h2">
+                        Kullanıcı Ekle
+                    </div>
+                    <div class="block-controls">
+                        <a href="/Kullanıcı/Ekle"><span aria-hidden="true" class="icon icon-cross icon-size-medium block-control-remove"></span></a>
+                        <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                    </div>
+                </div>
+                <div class="block-content-outer">
+                    <div class="block-content-inner">
+                        <form role="form" action="/Kullanıcı/Ekle" method="post">
+                            @*action="/Kullanıcı/Ekle" ile kategoricontrolurcss dekı kullanıcıekle gı-onderıyoruz ama ıkı tane oldugunda metod="post" yapıp post olana gonderdık*@
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Kullanıcı Adı</label>
+                                <input type="text" name="UserName" class="form-control" id="exampleInputEmail1" placeholder="Kullanıcı adını giriniz">
+                                @*form elemn.html den aldıgımız emaıl yapısından email kısmını soyle değiştirdik:1-type ı emaildi,biz urun adını texboxa gırecegımızden burayı text yaptı.2-placeholder="kategori adını giriniz"burası textboxın ıcınde yazan sılık yazıydı urun adını gırınız seklınde duzeltık*@
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Parola</label>
+                                <input type="password" min="3" class="form-control" name="Password" id="exampleInputPassword1" placeholder="Parola giriniz">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email:</label>
+                                <input type="text" name="Email" class="form-control" id="exampleInputEmail1" placeholder="Email adını giriniz">
+                                @*form elemn.html den aldıgımız emaıl yapısından email kısmını soyle değiştirdik:1-type ı emaildi,biz urun adını texboxa gırecegımızden burayı text yaptı.2-placeholder="kategori adını giriniz"burası textboxın ıcınde yazan sılık yazıydı urun adını gırınız seklınde duzeltık*@
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Gizli Soru:</label>
+                                <input type="text" name="passwordQuestion" class="form-control" id="exampleInputEmail1" placeholder="Gizlisoru  giriniz">
+                                @*form elemn.html den aldıgımız emaıl yapısından email kısmını soyle değiştirdik:1-type ı emaildi,biz urun adını texboxa gırecegımızden burayı text yaptı.2-placeholder="kategori adını giriniz"burası textboxın ıcınde yazan sılık yazıydı urun adını gırınız seklınde duzeltık*@
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Gizli Cevap:</label>
+                                <input type="text" name="passwordAnswer" class="form-control" id="exampleInputEmail1" placeholder="Gizli cevap  giriniz">
+                                @*form elemn.html den aldıgımız emaıl yapısından email kısmını soyle değiştirdik:1-type ı emaildi,biz urun adını texboxa gırecegımızden burayı text yaptı.2-placeholder="kategori adını giriniz"burası textboxın ıcınde yazan sılık yazıydı urun adını gırınız seklınde duzeltık*@
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <span id="hata">@ViewBag.mesaj</span> @*//kullanıcı olusturuken hata oldugunda ekle sayfasına donderecek ve hata mesajını yazdıracak*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Rol Ata";
+
+}
+@using System.Web.Security
+@model string
+<div class="row">
+    @*//row acıp ıcıne sayfanın tamamaını kapalasın dedık*@
+    <div class="col-md-12">
+        <div class="col-md-6 col-sm-6">
+            <div class="block">
+                <div class="block-heading">
+                    <div class="main-text h2">
+                        Rol Ata
+                    </div>
+                    <div class="block-controls">
+                        <a href="/Kullanıcı/Index"><span aria-hidden="true" class="icon icon-cross icon-size-medium block-control-remove"></span></a>
+                        <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                    </div>
+                </div>
+                <div class="block-content-outer">
+                    <div class="block-content-inner">
+                        <form role="form" action="/Kullanıcı/RolAta" method="post">
+                            @*action="/Rol/Ekle" ile kategoricontrolurcss dekırolekleye gı-onderıyoruz ama ıkı tane oldugunda metod="post" yapıp post olana gonderdık*@
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Kullanıcı Adı</label>
+                                @*//@Modelle kullanıcı adını verdık actıondan gelen.Disabled ile de değiştirilmesini engelledik*@
+
+                                <input type="text" name="UserName" value="@ViewBag.kullaniciAdi" class="form-control" id="exampleInputEmail1">
+                                <label for="exampleInputEmail1">Rol</label>
+                                <select name="Role" class="form-control">
+                                    @foreach (string roller in ViewBag.Roller)
+                        {
+                            <option value="@roller">@roller</option>
+            }
+
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

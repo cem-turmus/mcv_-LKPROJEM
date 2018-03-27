@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@using WebApplication13.Models
+@model List<Categories>
+<div class="row">
+    <div class="col-md-12">
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                    Kategoriler
+                </div>
+                <div class="block-controls">
+                    <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                    <a href="/Kategori/Ekle" class="btn success-btn rounded">Yeni Kategori</a>
+                </div>
+                <div class="block-content-outer">
+                    <div class="block-content-inner">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Kategori Adı</th>
+                                    <th>Tanımı</th>
+                                    <th>Sil</th>
+                                    <th>Güncelle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Categories ktg in Model)
+                                {
+                                    <tr>
+                                        <td>@ktg.CategoryName</td>
+                                        <td>@ktg.Description</td>
+                                        <td><a href="#" class="btn-danger ktgsil" data-ktgid="@ktg.CategoryID">Sil</a></td>
+                                        @*data ıcıne ktgid diye bır ıd actık dahasonra kategori ıd yı alıyoruz ve ajaxa (ajax 'ın kategori/sil e gondermesı ıcın) gonderdık*@
+                                        @*ktgsil asagıda script de ozellık kazanıp işlem gorecek *@
+                                        <td><a href="/Kategoriler/Güncelle/@ktg.CategoryID" class="btn-primary">Güncelle</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*layout sayfasında actıgmız sripts rendersectıon u yanı delıgıne srıpt sectıonunu yazıyoruz.Burdakı amac sıl ın yenı bır sayfaya gıtmesındense aynı sayfada kucuk bı uyarı penceresı uzerınden sılme ıslemını yapmak.Yukarıdada sıl sayfasına gıtmesını soyledıgımız a nın hrefıne # koyup baska sayfaya gıtmesını engelledık*@
+@*//Normalde urunlerde sil yaptıgımızda verdıgımız lınk urun/sıl/urunıd sayfasına yonlendıryordu.Biz baska sayfaya yonledırmeyı ıptal edıp kucuk bır messagebox a benzeyen bır kutuda yapmak istyoruz.Burda ajax devreye gırer.*@
+@section scripts {
+    @*<script src="~/Content/assets/js/required/jquery-1.11.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $(".ktgsil").click(function () {
+            var sonuc = confirm("Silmek istediğinize emin misiniz?");
+
+            if (sonuc) {
+                var ktgid = $(this).data("ktgid");
+
+// type : metodu post olan actıonu calıstır dıyoruz
+// url :  yukarıda td lerın ıcını foreach ıle doldururken ktgid yı data ozellıgıyle data-ktgid="ktg".CategoryID" seklınde kategoriıd ye esıtleyerek almıstık ve burada var ktgıd dıye yarattıgmız ıd ıle yakalıp kategıori/sil in post actıonuna gonderdık.Simdi gidip kategoricontrolundekı post tıpındekı id alan actıona kategori silme kodumuzu yazacagız.
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Kategori/Sil/" + ktgid
+                }).done(function (res) {
+
+                    console.log(res);
+
+                    if(res.hasError == false){
+                        alert(res.message);
+                        window.location.reload();
+                    }
+                }).fail(function(){
+                    alert("kayıt sılme anında hata olustu");
+                });
+
+            } else {
+              alert("İptale basıldı");
+            }
+
+        });
+    </script>
+}

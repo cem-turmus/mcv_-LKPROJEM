@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Ürün Detay";
+
+}
+@using WebApplication13.Models;
+@model Products
+
+<div class="row">
+    <div class="col-md-12">
+      
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                  Ürün Detayları
+                </div>
+               
+            </div>
+            <div class="block-content-outer">
+                <div class="block-content-inner">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ModelAdı</th>
+                                <th>Tedarikçi</th>
+                                <th>Kategori</th>
+                                <th>Birimdeki Miktar</th>
+                                <th>Fiyat</th>
+                                <th>Stok</th>
+                                <th>Yeni Satış</th>
+                                <th>En Az Yeniden Satış</th>
+                                <th>Sonlandı</th>
+                                <th>Detay</th>
+                                <th>Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                         
+                        
+                                <tr>
+                                    <td>@Model.ProductName</td>
+                                    @if (Model.Suppliers == null)
+                                    {
+                                        <td></td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.Suppliers.CompanyName</td>
+                                    }
+                                    @if (Model.Categories != null)
+                                    {
+                                        <td>@Model.Categories.CategoryName</td>
+
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+
+                                    <td>@Model.QuantityPerUnit</td>
+                                    <td>@Model.UnitPrice</td>
+                                    <td>@Model.UnitsInStock</td>
+                                    <td>@Model.UnitsOnOrder</td>
+                                    <td>@Model.ReorderLevel</td>
+                                    @if (Model.Discontinued)
+                                    {
+                                        <td><span class="label label-danger">Stokta Yok</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="label label-success">Stokta Var</span></td>//td ıcıne span atarak satıra renk verdık
+                                    }
+                                    <td><a href="Model/Eke/?id=@Model.ProductID" class="btn cke_btn_over">Detay</a></td>
+                                    <td><a href="/Model/Sil/@Model.ProductID" class="btn btn-danger rounded" role="button">Sil</a></td>
+                                    @*//Buron.html sayfasında danger lınk butonu alıp her satıra sıl butonu olarak ekledık.lınk sonuna @Model.ProductID eklememızdekı amac sılme anıda    public ActionResult Sil(int id) metodu sılenecek Modelun ıd sıne gore gıdecegı sayfaya id nolu Modelu de goturecek.yanı sadece sayfayı acıyoruz Model.Modelıd dıyerek*@
+                                </tr>
+                        
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
