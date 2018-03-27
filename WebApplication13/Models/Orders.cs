@@ -16,7 +16,7 @@ namespace WebApplication13.Models
 
         [Key]
         public int OrderID { get; set; }
-
+         
         [StringLength(5)]
         public string CustomerID { get; set; }
 
